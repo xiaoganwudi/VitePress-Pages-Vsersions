@@ -73,14 +73,18 @@ jobs:
           # 切换回原分支
           git checkout -
 
+      - name: Install dependencies
+        run: npm install
+
       - name: Build current version
         env:
           DOCS_VERSION: ${{ steps.version.outputs.version }}
           ALL_VERSIONS: ${{ steps.all_versions.outputs.versions }}
         run: |
           echo "🔨 Building version: $DOCS_VERSION"
-          # npm run docs:build 暂时注释掉，改用vitepress命令
-          npx vitepress build docs
+          # 暂时注释掉，改用vitepress命令
+          npm run docs:build 
+          # npx vitepress build docs
 
       - name: Prepare deployment with all versions
         run: |
