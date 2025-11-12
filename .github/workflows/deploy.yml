@@ -79,7 +79,8 @@ jobs:
           ALL_VERSIONS: ${{ steps.all_versions.outputs.versions }}
         run: |
           echo "🔨 Building version: $DOCS_VERSION"
-          npm run docs:build
+          # npm run docs:build 暂时注释掉，改用vitepress命令
+          npx vitepress build docs
 
       - name: Prepare deployment with all versions
         run: |
