@@ -8,7 +8,7 @@ const version = process.env.DOCS_VERSION || "latest";
 let allVersions = ["latest"];
 try {
   const versionsEnv = process.env.ALL_VERSIONS;
-  
+
   if (versionsEnv) {
     allVersions = ["latest", ...JSON.parse(versionsEnv)];
   }
@@ -46,6 +46,13 @@ export default {
         activeMatch: "/Pages/RearEnd/index",
       },
       { text: "测试", link: "/menu3/", activeMatch: "/menu3/" },
+      {
+        text: version === "latest" ? "📌 最新版" : `📌 ${version}`,
+        items: allVersions.map((v) => ({
+          text: v === "latest" ? "最新版 (latest)" : v,
+          link: `https://xiaoganwudi.github.io/github-server01/${v}/`,
+        })),
+      },
     ],
     // 设置nav的侧边导航栏
     sidebar: {
