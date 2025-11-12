@@ -17,7 +17,7 @@ try {
 }
 
 export default {
-  base: `/github-server01/${version}/`,
+  base: `/VitePress-Pages-Vsersions/${version}/`,
   title: `小甘博客 ${version === "latest" ? "latest" : version}`,
 
   description: "小甘博客", // 会渲染成<meta>标签，SEO用
@@ -50,7 +50,7 @@ export default {
         text: version === "latest" ? "📌 最新版" : `📌 ${version}`,
         items: allVersions.map((v) => ({
           text: v === "latest" ? "最新版 (latest)" : v,
-          link: `https://xiaoganwudi.github.io/github-server01/${v}/`,
+          link: `https://xiaoganwudi.github.io/VitePress-Pages-Vsersions/${v}/`,
         })),
       },
     ],
