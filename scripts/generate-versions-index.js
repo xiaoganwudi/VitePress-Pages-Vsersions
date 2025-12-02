@@ -1,0 +1,116 @@
+// ## 🔧 步骤4: 创建版本索引生成脚本
+import fs from "fs";
+import path from "path";
+
+const versions = JSON.parse(process.env.ALL_VERSIONS || "[]");
+const allVersions = ["latest", ...versions];
+
+const html = `    
+  小甘博客 - 版本选择
+  
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 2.5em;
+      text-align: center;
+    }
+    .subtitle {
+      color: #666;
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 1.1em;
+    }
+    .versions {
+      display: grid;
+      gap: 15px;
+    }
+    .version-card {
+      display: block;
+      padding: 20px 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      font-size: 1.2em;
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .version-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+    .version-card.latest {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    .version-card.latest::before {
+      content: "🔥 推荐";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255,255,255,0.3);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.7em;
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #999;
+      font-size: 0.9em;
+    }
+    .footer a {
+      color: #667eea;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  
+
+
+  
+    📚 小甘博客
+    选择一个版本开始阅读
+    
+      ${allVersions
+        .map(
+          (v) => `
+        
+          ${v === "latest" ? "📌 最新版 (Latest)" : `📦 ${v}`}
+        
+      `
+        )
+        .join("")}
+    
+    
+      Made with ❤️ by feiye
+      GitHub 仓库
+`;
+
+fs.writeFileSync("dist_final/index.html", html);
+console.log("✅ Version index page generated");
